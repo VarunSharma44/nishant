@@ -12,12 +12,14 @@ void display();
 void delete_at_beginning();
 void delete_at_end();
 void delete_at_position(int);
+void search_update(int ,int);
+void isprime(int);
 void main ()
 {
-    int choice,choice1,value,pos,pos2;
+    int choice,choice1,value,pos,pos2,s,u,n;
     while(1){
    MainMenu: printf("\nEnter a valid choice to perform following operation:\n");
-    printf(" 1.Insertion:\n 2.Deletion:\n 3.display:\n 4.Exit;\n");
+    printf(" 1.Insertion:\n 2.Deletion:\n 3.display:\n 4.Exit;\n 5.Search and update:\n 6.isprime:\n");
     scanf("%d",&choice);
         switch(choice)
         {
@@ -60,16 +62,30 @@ void main ()
 				break;
 		   case 2: 	delete_at_end();
 				break;
-		   case 3:      printf("Enter the value which you want delete: ");
+		   case 3:      printf("Enter the position where you want delete: ");
 				scanf("%d",&pos2);
 				delete_at_position(pos2);
 				break;
+
 		   default: 	printf("please enter a valid choice:");
 				goto MainMenu;
 		}
 		break;
            case 4:
             exit(0);
+
+           case 5:
+           printf("enter the search value:\n");scanf("%d",&s);
+           printf("Enter the updated value:\n");
+           scanf("%d",&u);
+            search_update(s,u);
+            break;
+        case 6:
+           printf("Enter a number:\n");
+           scanf("%d",&n);
+           isprime(n);
+           break;
+ 
             default:printf("please enter a valid choice:");
             break;
         }
@@ -151,7 +167,7 @@ void delete_at_position(int pos)
     }
     else
     {
-        for(int i=0;i<pos;i++)
+        for(int i=2;i<pos;i++)
             temp=temp->link;
         ptr=temp->link;
         temp->link=ptr->link;
@@ -164,5 +180,21 @@ void display()
     {
         printf("%d ",temp->data);
         temp=temp->link;
-    }
+    }
+}
+void search_update(int data,int updated_no)
+{
+    struct node* temp;
+    temp=head;
+    temp->data=updated_no;
+    }
+void isprime(int n)
+{
+    if(n>2)
+    return ;
+    for(int i=2;i<=n/2;i++)
+    {
+        if(n%i!=0)
+        insert_at_position(n,3);
+    }
 }
