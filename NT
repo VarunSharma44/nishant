@@ -477,3 +477,176 @@ printf("%d is not a palindrome no :\n",original_num);
     printf("please enter a another no: click 4\n");
 }
 }
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+void create();
+void display();
+void insert_last();
+void insert_pos();
+// void Insert_last(); 
+// void delete_first();
+void delete_pos();
+// void delete_last();
+// void Count_node();
+// void Search_node();
+// void reverse();
+
+struct node{
+ int data;
+ struct node *add;
+};struct node *start=NULL,*new1,*temp,*next,*prev,*arr[500];
+void main(){
+ int choice;
+do{
+ printf("\n----------Linkedlist Menu------------");
+ printf("\n1.create");
+ printf("\n2.display");
+ printf("\n3.insert First");
+ printf("\n4.insert middle");
+ printf("\n5.Insert last");
+ printf("\n6.Delete first");
+ printf("\n7.Delete middle");
+ printf("\n8.delete last");
+ printf("\n9.Count node");
+ printf("\n10.Search node");
+ printf("\n11.Reverse list");
+ printf("\n-------------------------------------");
+ printf("\n Enter your choice:");
+ scanf("%d",&choice);
+ switch(choice)
+ {
+  case 1:create();break;
+  case 2:display();break;
+   case 3:insert_last();break;
+  case 4:insert_pos();break;
+  // case 5:Insert_last(); break;
+  // case 6:delete_first();break;
+   case 7:delete_pos();break;
+  // case 8:delete_last(); break;
+  // case 9:Count_node();break;
+  // case 10:Search_node();break;
+  // case 11:reverse();break;
+  default: printf("\nInvalid choiice");
+ }
+} while(choice!=12);
+}
+ void create()
+ {
+  int n;
+  char ch;
+  printf("Enter first element:");
+  scanf("%d",&n);
+  start=(struct node*)(malloc(sizeof(struct node)));
+  start->data=n;
+  start->add=NULL;
+  temp=start;
+  printf("\n Do you want to continue:");
+// printf("Enter a character:");
+ scanf("%s",&ch);
+  while(ch=='y'||ch=='Y')
+  {
+    printf("Enter next element:");
+  scanf("%d",&n);
+  new1=(struct node*)(malloc(sizeof(struct node)));
+  new1->data=n;
+  new1->add=NULL;
+  temp->add=new1;
+  temp=temp->add;
+  new1->add=start;
+  printf("\n Do you want to continue:");
+// printf("Enter a character:");
+ scanf("%s",&ch);
+  }
+ }
+ 
+ 
+ void display(){
+     if(start==NULL){
+         printf("List not found");
+     }
+     temp=start;
+     do{
+         printf(" %d\t",temp->data);
+         temp=temp->add;
+     }
+     while(temp!=start);
+ }
+ 
+ 
+ void insert_last(){
+    int n;
+    if(start==NULL){
+        printf("List not found:");
+    }
+    else{
+    printf("Enter new element for insert:");
+    scanf("%d",&n);
+    new1=(struct node*)(malloc(sizeof(struct node)));
+    new1->data=n;
+    new1->add=NULL;
+    new1->add=start;
+    temp=start;
+    while(temp->add!=start){
+     temp=temp->add;
+    }
+    temp->add=new1;
+    }
+}
+
+void insert_pos(){
+ int n,pos,i=1;
+    if(start==NULL){
+        printf("List not found");
+    }
+    else{
+        printf("Enter the new elements for insert:");
+        scanf("%d",&n);
+        new1=(struct node*)(malloc(sizeof(struct node)));
+        new1->data=n;
+        new1->add=NULL;
+        printf("Enter the position:");
+        scanf("%d",&pos);
+        next=start;
+        while(i<pos){
+            prev=next;
+           next=next->add;
+           i++;
+        }
+        prev->add=new1;
+        new1->add=next;
+    }
+}
+
+void delete_pos(){
+    int pos,i=1;
+    if(start==NULL){
+        printf("List not found");
+    }
+    else{
+        printf("Enter the position:");
+        scanf("%d",&pos);
+        temp=start;
+        while(i<pos){
+           prev=temp;
+           temp=temp->add;
+           i++;
+        }
+          next=temp->add;
+         prev->add=next;
+         printf("Deleted node %d",temp->data);
+         free(temp);
+        }
+        
+    }
+ 
