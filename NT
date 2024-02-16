@@ -324,3 +324,156 @@ int main() {
 
     return 0;
 }
+
+
+#include<stdio.h>
+#include<stdlib.h>
+struct node{
+int data;
+struct node* prev;
+struct node* next;
+};
+void display();
+void iatb(int);
+void iatl(int);
+void iatp(int ,int);
+int pal(int);
+struct node* head=NULL;
+void main ()
+{
+    int value,choice,pos;
+    do{
+            printf("\n Menu :\n");
+        printf("1.Insertion at begining.\n");
+        printf("2.Insertion at last.\n");
+        printf("3.Insertion at position\n");
+        printf("4.Check palindrome or insert\n");
+        printf("3.Display.\n");
+        printf("0.Exit.\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+            printf("Enter the  inserted value :\n");
+        scanf("%d",&value);
+        iatb(value);
+        break;
+            case 2:
+                printf("Enter the  inserted value :\n");
+        scanf("%d",&value);
+        iatl(value);
+        break;
+            case 3:
+                printf("Enter the  inserted value :\n");
+        scanf("%d",&value);
+        printf("Enter the  position where you want to insert a value:\n");
+        scanf("%d",&pos);
+        iatp(value,pos);
+        break;
+            case 4:
+                printf("Enter the  inserted value :\n");
+        scanf("%d",&value);
+        pal(value);
+        break;
+            case 5:
+                display();
+                break;
+
+            case 0:
+                printf("Exiting the program.\n ");
+                break;
+            default:
+                printf("please enter a valid choice.\n");
+        }
+        }
+        while(choice!=0);
+          }
+void iatb(int data)
+{
+    struct node* p;
+    p=(struct node*)malloc(sizeof(struct node));
+    p->data=data;
+    p->prev=NULL;
+    p->next=NULL;
+    if(head==NULL){
+    head=p;
+    printf("One node is inserted:\n");
+    }
+    else {
+        head->prev=p;
+        p->next=head;
+        head=p;
+        printf("One node is inserted:\n");
+    }
+}
+void display()
+{
+    struct node* temp=head;
+    while(temp!=NULL)
+    {
+        printf("%d ",temp->data);
+        temp=temp->next;
+    }
+}
+void iatl(int data)
+{
+     struct node* q;
+    q=(struct node*)malloc(sizeof(struct node));
+    q->data=data;
+    q->next=NULL;
+    struct node* p;
+    p=head;
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    p->next=q;
+    q->prev=p;
+}
+void iatp(int data,int pos)
+{
+    struct node* q;
+    q=(struct node*)malloc(sizeof(struct node));
+    q->data=data;
+    q->prev=NULL;
+    q->next=NULL;
+    struct node* p=head;;
+    for(int i=2;i<pos;i++)
+        p=p->next;
+
+    p->next->prev=q;
+    q->next=p->next;
+    p->next=q;
+    q->prev=p;
+}
+int pal(int num)
+{
+    int original_num=num;
+    int r,flag;
+    if(num<11){
+            flag=2;
+        printf("%d is not a palindrome no :\n",num);
+    printf("please enter a another no: click 4\n");
+    return 0;
+    }
+    else{
+    while(num>0){
+            r=r*10;
+            r=r+num%10;
+            num=num/10;
+    }
+    }
+    if(r==original_num){
+        flag=1;
+            printf("%d is a palindrome no:",num);
+            int pos;
+       printf("\npls enter position where you want to insert this number:\n");
+    scanf("%d",&pos);
+    iatp(original_num,pos);
+}
+else if(flag!=1)
+{
+printf("%d is not a palindrome no :\n",original_num);
+    printf("please enter a another no: click 4\n");
+}
+}
