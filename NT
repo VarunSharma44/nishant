@@ -198,3 +198,129 @@ void isprime(int n)
         insert_at_position(n,3);
     }
 }
+#include <stdio.h>
+
+// Function to print the array
+void printArray(int arr[], int size) {
+    printf("Array elements: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+// Function to insert an element at a specified position
+void insertElement(int arr[], int size, int element, int position) {
+    if (position < 1 || position > size + 1) {
+        printf("Invalid position for insertion\n");
+        return;
+    }
+
+    for (int i = size - 1; i >= position - 1; i--) {
+        arr[i + 1] = arr[i];
+    }
+
+    arr[position - 1] = element;
+    printf("Element %d inserted at position %d\n", element, position);
+}
+
+// Function to delete an element from the array
+void deleteElement(int arr[], int size, int element) {
+    int found = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == element) {
+            for (int j = i; j < size - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            found = 1;
+            size--;
+            break;
+        }
+    }
+
+    if (found) {
+        printf("Element %d deleted from the array\n", element);
+    } else {
+        printf("Element %d not found in the array\n", element);
+    }
+}
+
+// Function to search and update an element in the array
+void searchAndUpdate(int arr[], int size, int target, int update) {
+    int found = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == target) {
+            arr[i] = update;
+            found = 1;
+            break;
+        }
+    }
+
+    if (found) {
+        printf("Element %d found and updated with %d\n", target, update);
+    } else {
+        printf("Element %d not found in the array\n", target);
+    }
+}
+
+int main() {
+    int arr[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+    // Traversal: print the array
+    printArray(arr, 10);
+
+    // Insertion: insert 99 at position 4
+    insertElement(arr, 10, 99, 4);
+    printArray(arr, 11);
+
+    // Deletion: delete element 6
+    deleteElement(arr, 11, 6);
+    printArray(arr, 10);
+
+    // Search and Update: search for 8 and update with 66
+    searchAndUpdate(arr, 10, 8, 66);
+    printArray(arr, 10);
+    return o;
+    }
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+
+    // Get the number of elements from the user
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    // Dynamically allocate memory for the array
+    int arr = (int)malloc(n * sizeof(int));
+
+    // Check if memory allocation is successful
+    if (arr == NULL) {
+        printf("Memory allocation failed.\n");
+        return 1; // Exit with an error code
+    }
+
+    // Input numbers from the user
+    printf("Enter %d numbers:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Calculate the sum of numbers
+ int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+    }
+
+    // Print the sum
+    printf("Sum of the numbers: %d\n", sum);
+
+    // Free the dynamically allocated memory
+    free(arr);
+
+    return 0;
+}
